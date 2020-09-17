@@ -68,7 +68,7 @@
         float4 colorFiniteDifference1 = color3 - color2;
 
         float edgeAlpha = sqrt(dot(colorFiniteDifference0.a, colorFiniteDifference0.a) + dot(colorFiniteDifference1.a, colorFiniteDifference1.a));
-
+        edgeAlpha = step(1- edgeAlpha, 0.01);
         float edgeColor = sqrt(dot(colorFiniteDifference0.xyz, colorFiniteDifference0.xyz) + dot(colorFiniteDifference1.xyz, colorFiniteDifference1.xyz));
         edgeColor = edgeColor > colorThreshold ? 1 : 0;
 
@@ -86,13 +86,14 @@
         float4 color = float4(CustomPassSampleCameraColor(posInput.positionNDC.xy, 0), 1);
 
         // Do some normal, depth and color based edge detection on the camera buffers.
-        float4 edgeDetectColor = EdgeDetect(posInput.positionNDC.xy, _EdgeDetectDepthThreshold, _EdgeDetectNormalThreshold, _EdgeDetectColorThreshold);
+        float4 edge = EdgeDetect(posInput.positionNDC.xy, _EdgeDetectDepthThreshold, _EdgeDetectNormalThreshold, _EdgeDetectColorThreshold);
 
         // Remove the edge detect effect between the sky and objects when the object is inside the sphere
-        edgeDetectColor *= depth != UNITY_RAW_FAR_CLIP_VALUE;
+        edge *= depth != UNITY_RAW_FAR_CLIP_VALUE;
 
         // Combine edge and camera color
-        return color * (1 - edgeDetectColor) + edgeDetectColor * _EdgeColor;
+        return color * (1 - edge) + edge * _EdgeColor;
+        //return (1 - edge) * _EdgeColor + (color * edge);// +edge * _EdgeColor;
     }
 
     // We need this copy because we can't sample and write to the same render target (Camera color buffer)
