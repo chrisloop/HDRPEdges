@@ -42,7 +42,7 @@ class EdgeDetectionEditor : CustomPassDrawer
 
     protected override void DoPassGUI(SerializedProperty customPass, Rect rect)
     {
-        edgeDetectColorThreshold.floatValue = EditorGUI.Slider(rect, Styles.edgeColorThreshold, edgeDetectColorThreshold.floatValue, 0f, 1f);
+        edgeDetectColorThreshold.floatValue = EditorGUI.Slider(rect, Styles.edgeColorThreshold, edgeDetectColorThreshold.floatValue, 0f, 100f);
         rect.y += Styles.defaultLineSpace;
 
         edgeDetectNormalThreshold.floatValue = EditorGUI.Slider(rect, Styles.edgeNormalThreshold, edgeDetectNormalThreshold.floatValue, 0f, 1f);
