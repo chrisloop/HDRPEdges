@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: White
+  m_Name: Stair
   m_Shader: {fileID: -6465566751694194690, guid: c22345350dbe84a42a8c27b501118bf8,
     type: 3}
   m_ShaderKeywords: 
@@ -37,7 +37,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Floats:
-    - Vector1_7E15F828: 2.4
+    - Vector1_7E15F828: 0.1
     - _AlphaCutoffEnable: 0
     - _AlphaDstBlend: 0
     - _AlphaSrcBlend: 1
